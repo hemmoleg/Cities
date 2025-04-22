@@ -26,6 +26,8 @@ let CapitalController = class CapitalController {
         return this.capitalService.findByName(name);
     }
     create(capital) {
+        console.log("received create call");
+        console.log(capital);
         return this.capitalService.create(capital);
     }
     update(id, capital) {

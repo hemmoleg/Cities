@@ -18,6 +18,8 @@ export class CapitalController {
 
   @Post()
   create(@Body() capital: Partial<Capital>): Promise<Capital> {
+    console.log("received create call");
+    console.log(capital);
     return this.capitalService.create(capital);
   }
 

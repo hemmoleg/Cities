@@ -11,11 +11,9 @@ import { ConfigModule } from '@nestjs/config';
       type: 'postgres',
       url: process.env.DATABASE_URL,
       entities: [Capital],
-      synchronize: true, // Nur für Entwicklung!
+      synchronize: false,
     }),
     CapitalModule,
   ],
 })
 export class AppModule {}
-
-// docker exec -it capitals-db psql -U postgres -d capitals

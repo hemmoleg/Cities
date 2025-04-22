@@ -23,7 +23,7 @@ exports.AppModule = AppModule = __decorate([
                 type: 'postgres',
                 url: process.env.DATABASE_URL,
                 entities: [capital_entity_1.Capital],
-                synchronize: true,
+                synchronize: false,
             }),
             capital_module_1.CapitalModule,
         ],
