@@ -1,6 +1,12 @@
 import { create } from "zustand";
+import { Capital } from "./capital";
 
-export const useCapitalStore = create((set) => ({
+type CapitalStore = {
+  capitals: Capital[];
+  setCapitals: (data: Capital[]) => void;
+};
+
+export const useCapitalStore = create<CapitalStore>((set) => ({
   capitals: [],
   setCapitals: (data: any[]) => set({ capitals: data }),
 }));

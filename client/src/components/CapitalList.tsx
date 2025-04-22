@@ -11,7 +11,7 @@ export function CapitalList() {
   }, [setCapitals]);
 
   return (
-    <div className="w-1/3 overflow-auto p-4">
+    <div className="w-1/4 overflow-auto p-4">
       <h2 className="text-xl mb-2">Hauptstädte</h2>
       <ul>
         {capitals.map((cap) => (

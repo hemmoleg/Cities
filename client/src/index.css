@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 body {
   margin: 0;
   padding: 0;
@@ -5,9 +7,18 @@ body {
 }
 
 #root {
-  height: 100vh; /* Ensure the root container takes the full viewport height */
+  height: 100vh;
 }
 
 .flex-1 {
-  height: 100%; /* Ensure the map container takes the full height of its parent */
+  height: 100%;
+}
+
+.marker {
+  width: 13px;
+  height: 13px;
+  background-color: blue;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
 }

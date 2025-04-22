@@ -19,19 +19,28 @@ export function MapView() {
       zoom: 1.5,
     });
 
-    console.log("Capitals changed");
-
-    return
     capitals.forEach((cap) => {
       const el = document.createElement("div");
-      el.style.width = "32px";
-      el.style.height = "32px";
-      el.style.backgroundColor = "red";
+      el.className = "marker"
 
-      new mapboxgl.Marker(el)
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+      }).setText(`${cap.name}, ${cap.country}`);
+
+      const marker = new mapboxgl.Marker(el)
         .setLngLat([cap.longitude, cap.latitude])
-        .setPopup(new mapboxgl.Popup().setText(`${cap.name}, ${cap.country}`))
         .addTo(map);
+
+      // Show popup on hover
+      el.addEventListener("mouseenter", () => {
+        popup.setLngLat([cap.longitude, cap.latitude]).addTo(map);
+      });
+
+      // Hide popup when not hovering
+      el.addEventListener("mouseleave", () => {
+        popup.remove();
+      });
     });
   }, [capitals]);
 
