@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
-import { useCapitalStore } from "../store/capitals";
+import { useCityStore } from "../store/cities";
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { Capital } from "../store/capital";
+import { City } from "../store/city";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;;
 
 export function MapView() {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
-  const { capitals, capitalColors, setCapitalColor,  markers, addMarker, removeMarker } = useCapitalStore();
+  const { cities, cityColors, setCityColor,  markers, addMarker, removeMarker } = useCityStore();
 
   // Initialize map only once
   useEffect(() => {
@@ -24,26 +24,26 @@ export function MapView() {
   }, []);
 
   // Function to show marker for a capital
-  const addMarkerToCapital = (cap: Capital) => {
+  const addMarkerToCity = (city: City) => {
     const existingMarkers = markers;
-    if (existingMarkers[cap.id]) return;
+    if (existingMarkers[city.id]) return;
 
     const el = document.createElement("div");
     el.className = "marker";
-    el.style.backgroundColor = capitalColors[cap.id] || "red";
-    el.dataset.id = cap.id.toString();
+    el.style.backgroundColor = cityColors[city.id] || "red";
+    el.dataset.id = city.id.toString();
 
     const colorInput = document.createElement("input");
     colorInput.type = "color";
-    colorInput.value = capitalColors[cap.id] || "#ff0000";
+    colorInput.value = cityColors[city.id] || "#ff0000";
     colorInput.addEventListener("input", (e) => {
       const newColor = (e.target as HTMLInputElement).value;
       el.style.backgroundColor = newColor;
-      setCapitalColor(cap.id, newColor);
+      setCityColor(city.id, newColor);
     });
 
     const popupContent = document.createElement("div");
-    popupContent.innerText = `${cap.name}, ${cap.country}`;
+    popupContent.innerText = `${city.name}, ${city.country}`;
     popupContent.appendChild(document.createElement("br"));
     popupContent.appendChild(colorInput);
 
@@ -57,15 +57,15 @@ export function MapView() {
     }).setDOMContent(wrapper);
 
     const marker = new mapboxgl.Marker(el)
-      .setLngLat([cap.longitude, cap.latitude])
+      .setLngLat([city.longitude, city.latitude])
       .addTo(mapRef.current!);
 
-    existingMarkers[cap.id] = marker;
+    existingMarkers[city.id] = marker;
 
     let hovering = false;
 
       const showPopup = () => {
-        popup.setLngLat([cap.longitude, cap.latitude]).addTo(mapRef.current!);
+        popup.setLngLat([city.longitude, city.latitude]).addTo(mapRef.current!);
       };
 
       const hidePopup = () => {
@@ -91,29 +91,29 @@ export function MapView() {
         hidePopup();
       });
 
-      addMarker(cap.id, marker);
+      addMarker(city.id, marker);
   };
 
-  const removeMarkerFromCapital = (cap: Capital) => {
+  const removeMarkerFromCapital = (city: City) => {
 
     const existingMarkers = markers;
-    if (!existingMarkers[cap.id]) return;
+    if (!existingMarkers[city.id]) return;
 
-    existingMarkers[cap.id].remove();
-    delete existingMarkers[cap.id];
-    removeMarker(cap.id);
+    existingMarkers[city.id].remove();
+    delete existingMarkers[city.id];
+    removeMarker(city.id);
   }
 
   // Public method via window for adding a marker externally
   useEffect(() => {
-    (window as any).addMarkerToCapital = addMarkerToCapital;
-    (window as any).removeMarkerFromCapital = removeMarkerFromCapital;
-  }, [capitals, capitalColors]);
+    (window as any).addMarkerToCity = addMarkerToCity;
+    (window as any).removeMarkerFromCity = removeMarkerFromCapital;
+  }, [cities, cityColors]);
 
   // Update marker colors only when colors change
   useEffect(() => {
     const existingMarkers = markers;
-    const { lastUpdatedId } = useCapitalStore.getState();
+    const { lastUpdatedId } = useCityStore.getState();
 
     if (lastUpdatedId == undefined) 
       return
@@ -121,11 +121,11 @@ export function MapView() {
     const marker = existingMarkers[lastUpdatedId];
     if (marker) {
       const el = marker.getElement();
-      const color = capitalColors[lastUpdatedId];
+      const color = cityColors[lastUpdatedId];
       if (color) el.style.backgroundColor = color;
     
     }
-  }, [capitalColors]);
+  }, [cityColors]);
 
   return <div ref={mapContainer} className="flex-1" />;
 }

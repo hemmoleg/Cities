@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useCapitalStore } from "../store/capitals";
+import { useCityStore } from "../store/cities";
 import { AddCityPopup } from "./AddCityPopup";
 
 
-export function CapitalList() {
-  const { capitals, setCapitals, markers} =
-    useCapitalStore();
-  const [selectedCapital, setSelectedCapital] = useState<number | null>(null);
+export function CityList() {
+  const { cities, setCities, markers} =
+    useCityStore();
+  const [selectedCity, setSelectedCapital] = useState<number | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/capital")
       .then((res) => res.json())
-      .then(setCapitals);
-  }, [setCapitals]);
+      .then(setCities);
+  }, [setCities]);
 
-  const handleAddMarker = (capitalId: number) => {
-    const capital = capitals.find((cap) => cap.id === capitalId);
-    if (capital) {
-      (window as any).addMarkerToCapital(capital); // Call the global method
+  const handleAddMarker = (cityId: number) => {
+    const city = cities.find((city) => city.id === cityId);
+    if (city) {
+      (window as any).addMarkerToCity(city); // Call the global method
     }
   };
 
-  const handleRemoveMarker = (capitalId: number) => {
-    const capital = capitals.find((cap) => cap.id === capitalId);
-    if (capital) {
-      (window as any).removeMarkerFromCapital(capital); // Call the global method
+  const handleRemoveMarker = (cityId: number) => {
+    const city = cities.find((city) => city.id === cityId);
+    if (city) {
+      (window as any).removeMarkerFromCity(city); // Call the global method
     }
   };  
 
@@ -33,23 +33,23 @@ export function CapitalList() {
     <div className="w-1/4 overflow-auto p-4">
       <h2 className="text-xl mb-2">Hauptstädte</h2>
       <ul>
-        {capitals.map((cap) => (
-          <React.Fragment key={cap.id}>
+        {cities.map((city) => (
+          <React.Fragment key={city.id}>
             <li
               onClick={() =>
-                setSelectedCapital((prev) => (prev === cap.id ? null : cap.id)) // Toggle the selected capital
+                setSelectedCapital((prev) => (prev === city.id ? null : city.id)) // Toggle the selected capital
               }
               className="cursor-pointer p-2 border-b hover:bg-gray-200"
             >
-              {cap.name} ({cap.country})
-              {selectedCapital === cap.id && (
+              {city.name} ({city.country})
+              {selectedCity === city.id && (
               <div className="p-4 bg-gray-50 border cursor-default rounded shadow mb-2">
-              {markers[cap.id] ? (
+              {markers[city.id] ? (
                 <button
                   className="cursor-pointer bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleRemoveMarker(cap.id)
+                    handleRemoveMarker(city.id)
                   }}
                 >
                   Remove Marker
@@ -59,7 +59,7 @@ export function CapitalList() {
                   className="cursor-pointer bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleAddMarker(cap.id)
+                    handleAddMarker(city.id)
                   }}
                 >
                   Add Marker
