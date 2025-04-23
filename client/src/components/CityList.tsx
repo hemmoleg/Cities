@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCityStore } from "../store/cities";
 import { AddCityPopup } from "./AddCityPopup";
+import { ApiService } from "../services/ApiService";
 
 
 export function CityList() {
@@ -10,9 +11,15 @@ export function CityList() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/capital")
-      .then((res) => res.json())
-      .then(setCities);
+    (async () => {
+      try {
+        const fetchedCities = await ApiService.fetchCities();
+        setCities(fetchedCities);
+      } catch (error) {
+        console.error("Error loading cities:", error);
+      }
+    })();
+
   }, [setCities]);
 
   const handleAddMarker = (cityId: number) => {
@@ -31,7 +38,7 @@ export function CityList() {
 
   return (
     <div className="w-1/4 overflow-auto p-4">
-      <h2 className="text-xl mb-2">Hauptstädte</h2>
+      <h2 className="text-xl mb-2">Hauptstädte und Städte</h2>
       <ul>
         {cities.map((city) => (
           <React.Fragment key={city.id}>

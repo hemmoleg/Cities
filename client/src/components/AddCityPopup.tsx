@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ApiService } from "../services/ApiService";
 
 interface AddCityPopupProps {
   onClose: () => void; // Function to close the popup
@@ -17,7 +18,7 @@ export function AddCityPopup({ onClose }: AddCityPopupProps) {
     !isNaN(parseFloat(latitude)) &&
     !isNaN(parseFloat(longitude));
 
-  const handleSubmit = () => {
+  const handleSubmit =  async () => {
     const newCity = {
       name,
       country,
@@ -26,7 +27,15 @@ export function AddCityPopup({ onClose }: AddCityPopupProps) {
     };
 
     console.log("New City:", newCity); // For debugging
-    onClose(); // Close the popup after submission
+    //onClose(); // Close the popup after submission
+  
+    try {
+      await ApiService.addCity(newCity); // Call the API to add the city
+      onClose(); // Close the popup after successful submission
+    } catch (err) {
+      console.error("Failed to add city. Please try again."); // Handle errors
+    }
+  
   };
 
   return (
