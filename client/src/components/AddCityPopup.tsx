@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ApiService } from "../services/ApiService";
+import { useCityStore } from "../store/cities";
 
 interface AddCityPopupProps {
   onClose: () => void; // Function to close the popup
@@ -10,6 +11,9 @@ export function AddCityPopup({ onClose }: AddCityPopupProps) {
   const [country, setCountry] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+
+  const { cities, setCities} = useCityStore();
+
 
   // Check if all fields are valid
   const isFormValid =
@@ -26,14 +30,15 @@ export function AddCityPopup({ onClose }: AddCityPopupProps) {
       longitude: parseFloat(longitude),
     };
 
-    console.log("New City:", newCity); // For debugging
-    //onClose(); // Close the popup after submission
+    console.log("New City:", newCity); 
   
     try {
-      await ApiService.addCity(newCity); // Call the API to add the city
-      onClose(); // Close the popup after successful submission
+      let city = await ApiService.addCity(newCity);
+      onClose();
+      cities.push(city);
+      setCities([...cities]);
     } catch (err) {
-      console.error("Failed to add city. Please try again."); // Handle errors
+      console.error("Failed to add city. Please try again.");
     }
   
   };

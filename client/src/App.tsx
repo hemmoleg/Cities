@@ -1,6 +1,5 @@
 import { MapView } from "./components/MapView";
 import { CityList } from "./components/CityList";
-import { AddCityPopup } from "./components/AddCityPopup";
 
 function App() {
   return (

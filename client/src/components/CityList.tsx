@@ -36,6 +36,15 @@ export function CityList() {
     }
   };  
 
+  const handleRemoveCity = async (cityId: number) => {
+    try {
+      await ApiService.removeCity(cityId); // Call the API to remove the city
+      setCities(cities.filter((city) => city.id !== cityId)); // Update the state to remove the city
+    } catch (error) {
+      console.error("Failed to remove city:", error);
+    }
+  };  
+
   return (
     <div className="w-1/4 overflow-auto p-4">
       <h2 className="text-xl mb-2">Hauptstädte und Städte</h2>
@@ -71,7 +80,18 @@ export function CityList() {
                 >
                   Add Marker
                 </button>
+                
               )}
+              <button
+                className="cursor-pointer bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded ml-2"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleRemoveMarker(city.id);
+                  handleRemoveCity(city.id);
+                }}
+              >
+                Remove City
+              </button>
             </div>
           )}
         </li>

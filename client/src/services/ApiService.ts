@@ -1,3 +1,5 @@
+import { City } from "../store/city";
+
 export class ApiService {
   private static BASE_URL = "http://localhost:3000"; // Base URL for the backend
 
@@ -18,7 +20,7 @@ export class ApiService {
     country: string;
     latitude: number;
     longitude: number;
-  }): Promise<void> {
+  }): Promise<City> {
     const response = await fetch(`${this.BASE_URL}/capital`, {
       method: "POST",
       headers: {
@@ -30,7 +32,17 @@ export class ApiService {
     if (!response.ok) {
       throw new Error("Failed to add city");
     }
+    return response.json(); // Return the added city
   }
+  
+  // Method to remove a city
+  static async removeCity(cityId: number): Promise<void> {
+    const response = await fetch(`${this.BASE_URL}/capital/${cityId}`, {
+      method: "DELETE",
+    });
 
-  // Additional methods for other API calls can be added here
+    if (!response.ok) {
+      throw new Error("Failed to remove city");
+    }
+  }
 }
