@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useCapitalStore } from "../store/capitals";
+import { AddCityPopup } from "./AddCityPopup";
+
 
 export function CapitalList() {
   const { capitals, setCapitals, markers} =
     useCapitalStore();
   const [selectedCapital, setSelectedCapital] = useState<number | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/capital")
@@ -68,6 +71,22 @@ export function CapitalList() {
       </React.Fragment>
     ))}
   </ul>
+
+    {/* Circular Button */}
+    <button
+      className="absolute bottom-4 left-4 w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-blue-400"
+      onClick={() => setIsPopupOpen(true)} // Open the popup
+    >
+      +
+    </button>
+
+    {/* Popup */}
+    {isPopupOpen && (
+      <AddCityPopup
+        onClose={() => setIsPopupOpen(false)} // Close the popup
+      />
+    )}
+
 </div>
 );
 }
