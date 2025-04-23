@@ -4,7 +4,8 @@ import { Capital } from "./capital";
 type CapitalStore = {
   capitals: Capital[];
   capitalColors: Record<number, string>;
-  
+  lastUpdatedId?: number;
+
   setCapitals: (data: Capital[]) => void;
   setCapitalColor: (id: number, color: string) => void;
 };
@@ -21,5 +22,6 @@ export const useCapitalStore = create<CapitalStore>((set) => ({
         ...state.capitalColors,
         [id]: color,
       },
+      lastUpdatedId: id,
     })),
 }));

@@ -7,22 +7,37 @@ mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;;
 
 export function MapView() {
   const mapContainer = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<mapboxgl.Map | null>(null);
   const { capitals, capitalColors, setCapitalColor } = useCapitalStore();
+  const markerMapRef = useRef<Record<number, mapboxgl.Marker>>({});
 
+  // Initialize map only once
   useEffect(() => {
-    if (!mapContainer.current) return;
+    if (!mapContainer.current || mapRef.current) return;
 
-    const map = new mapboxgl.Map({
+    mapRef.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [0, 20],
       zoom: 1.5,
     });
+  }, []);
 
+  // Add markers when capitals change
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    const map = mapRef.current;
+    const existingMarkers = markerMapRef.current;
+
+    // Add or update markers
     capitals.forEach((cap) => {
+      if (existingMarkers[cap.id]) return; 
+
       const el = document.createElement("div");
-      el.className = "marker"
+      el.className = "marker";
       el.style.backgroundColor = capitalColors[cap.id] || "red";
+      el.dataset.id = cap.id.toString();
 
       const colorInput = document.createElement("input");
       colorInput.type = "color";
@@ -49,12 +64,15 @@ export function MapView() {
 
       const marker = new mapboxgl.Marker(el)
         .setLngLat([cap.longitude, cap.latitude])
-        .addTo(map);
+        .addTo(mapRef.current!);
+
+      existingMarkers[cap.id] = marker;
+
 
       let hovering = false;
 
       const showPopup = () => {
-        popup.setLngLat([cap.longitude, cap.latitude]).addTo(map);
+        popup.setLngLat([cap.longitude, cap.latitude]).addTo(mapRef.current!);
       };
 
       const hidePopup = () => {
@@ -77,11 +95,27 @@ export function MapView() {
 
       wrapper.addEventListener("mouseleave", () => {
         hovering = false;
-        setTimeout(hidePopup, 100);
+        hidePopup();
       });
-
     });
-  }, [capitals, capitalColors, setCapitalColor]);
+  }, [capitals]);
+
+  // Update marker colors only when colors change
+  useEffect(() => {
+    const existingMarkers = markerMapRef.current;
+    const { lastUpdatedId } = useCapitalStore.getState();
+
+    if (lastUpdatedId == undefined) 
+      return
+    
+    const marker = existingMarkers[lastUpdatedId];
+    if (marker) {
+      const el = marker.getElement();
+      const color = capitalColors[lastUpdatedId];
+      if (color) el.style.backgroundColor = color;
+    
+    }
+  }, [capitalColors]);
 
   return <div ref={mapContainer} className="flex-1" />;
 }
