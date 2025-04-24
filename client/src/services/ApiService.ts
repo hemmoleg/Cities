@@ -32,10 +32,32 @@ export class ApiService {
     if (!response.ok) {
       throw new Error("Failed to add city");
     }
-    return response.json(); // Return the added city
+    return response.json();
   }
   
-  // Method to remove a city
+  static async updateCity(
+    cityId: number,
+    updatedCity: {
+      name: string;
+      country: string;
+      latitude: number;
+      longitude: number;
+    }
+  ): Promise<City> {
+    const response = await fetch(`${this.BASE_URL}/capital/${cityId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedCity),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update city");
+    }
+    return response.json();
+  }
+
   static async removeCity(cityId: number): Promise<void> {
     const response = await fetch(`${this.BASE_URL}/capital/${cityId}`, {
       method: "DELETE",

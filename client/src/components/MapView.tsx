@@ -64,34 +64,36 @@ export function MapView() {
 
     let hovering = false;
 
-      const showPopup = () => {
-        popup.setLngLat([city.longitude, city.latitude]).addTo(mapRef.current!);
-      };
+    const showPopup = () => {
+      let cityy = cities.find((c) => c.id === city.id)!;
+      console.log("city:", cityy);
+      popup.setLngLat([city.longitude, city.latitude]).addTo(mapRef.current!);
+    };
 
-      const hidePopup = () => {
-        if (!hovering) popup.remove();
-      };
+    const hidePopup = () => {
+      if (!hovering) popup.remove();
+    };
 
-      el.addEventListener("mouseenter", () => {
-        hovering = true;
-        showPopup();
-      });
+    el.addEventListener("mouseenter", () => {
+      hovering = true;
+      showPopup();
+    });
 
-      el.addEventListener("mouseleave", () => {
-        hovering = false;
-        setTimeout(hidePopup, 100);
-      });
+    el.addEventListener("mouseleave", () => {
+      hovering = false;
+      setTimeout(hidePopup, 100);
+    });
 
-      wrapper.addEventListener("mouseenter", () => {
-        hovering = true;
-      });
+    wrapper.addEventListener("mouseenter", () => {
+      hovering = true;
+    });
 
-      wrapper.addEventListener("mouseleave", () => {
-        hovering = false;
-        hidePopup();
-      });
+    wrapper.addEventListener("mouseleave", () => {
+      hovering = false;
+      hidePopup();
+    });
 
-      addMarker(city.id, marker);
+    addMarker(city.id, marker);
   };
 
   const removeMarkerFromCapital = (city: City) => {
@@ -99,8 +101,8 @@ export function MapView() {
     const existingMarkers = markers;
     if (!existingMarkers[city.id]) return;
 
-    existingMarkers[city.id].remove();
-    delete existingMarkers[city.id];
+    // existingMarkers[city.id].remove();
+    // delete existingMarkers[city.id];
     removeMarker(city.id);
   }
 
