@@ -50,27 +50,13 @@ export function AddCityPopup({ onClose, city }: AddCityPopupProps) {
   
     try {
       if (city) {
-        // Update existing city
         const savedCity = await ApiService.updateCity(city.id, updatedCity);
-        console.log("Saved City:", savedCity); // Log the saved city
-        //setCities(cities.map(c => c.id === savedCity.id ? savedCity : c));
 
-        let ccc = cities.map(c => c.id === savedCity.id ? savedCity : c)
-
-        console.log("ccc:", ccc.find(c => c.id === savedCity.id)); // Log the updated city
-        setCities(ccc);
-
-        // setCities(
-        //   cities.map((c) => (c.id === city.id ? { ...c, ...updatedCity } : c))
-        // );
+        setCities(cities.map(c => c.id === savedCity.id ? savedCity : c))
 
         if (markers[city.id]) {
-          let marker = markers[city.id];
-          removeMarker(city.id);
-          addMarker(city.id, marker);
-          
-          // markers[city.id]
-          //   .setLngLat([updatedCity.longitude, updatedCity.latitude])
+          markers[city.id]
+            .setLngLat([updatedCity.longitude, updatedCity.latitude])
         }
       } else {
         const city = await ApiService.addCity(updatedCity);
