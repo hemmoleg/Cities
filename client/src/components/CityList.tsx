@@ -6,7 +6,7 @@ import { City } from "../store/city";
 
 
 export function CityList() {
-  const { cities, setCities, markers} = useCityStore();
+  const { cities, setCities, markers, removeMarker} = useCityStore();
   const [selectedCity, setSelectedCapital] = useState<number | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [cityToEdit, setCityToEdit] = useState<City | null>(null);
@@ -31,10 +31,8 @@ export function CityList() {
   };
 
   const handleRemoveMarker = (cityId: number) => {
-    const city = cities.find((city) => city.id === cityId);
-    if (city) {
-      (window as any).removeMarkerFromCity(city);
-    }
+    markers[cityId].remove();
+    removeMarker(cityId);
   };  
 
   const handleRemoveCity = async (cityId: number) => {

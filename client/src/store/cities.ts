@@ -37,6 +37,7 @@ export const useCityStore = create<CityStore>((set) => ({
     set((state) => {
       const updatedMarkers = { ...state.markers };
       delete updatedMarkers[cityId];
+
       return { markers: updatedMarkers };
     }),
 }));
