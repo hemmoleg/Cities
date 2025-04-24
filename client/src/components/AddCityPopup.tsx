@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ApiService } from "../services/ApiService";
 import { useCityStore } from "../store/cities";
 import { City } from "../store/city";
-import mapboxgl from "mapbox-gl";
 
 interface AddCityPopupProps {
   onClose: () => void; 

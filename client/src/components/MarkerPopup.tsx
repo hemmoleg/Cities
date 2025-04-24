@@ -1,4 +1,3 @@
-import React from "react";
 import { useCityStore } from "../store/cities";
 
 interface PopupComponentProps {
@@ -18,7 +17,6 @@ export function PopupComponent({ cityId, cityName, countryName, color, onColorCh
       <div>
         {cityName}, {countryName}
       </div>
-      <br />
       <input
         type="color"
         value={color}

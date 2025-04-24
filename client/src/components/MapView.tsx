@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import { useCityStore } from "../store/cities";
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -60,13 +60,12 @@ export function MapView() {
       <MarkerComponent
         color={color}
         cityId={city.id}
-        popup={popup}
-        mapRef={mapRef}
       />
     );
 
     const marker = new mapboxgl.Marker(markerContainer)
       .setLngLat([city.longitude, city.latitude])
+      .setPopup(popup)
       .addTo(mapRef.current!);
 
     addMarker(city.id, marker);
