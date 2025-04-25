@@ -60,14 +60,14 @@ export function CityList() {
               onClick={() =>
                 setSelectedCapital((prev) => (prev === city.id ? null : city.id)) // Toggle the selected capital
               }
-              className="cursor-pointer p-2 border-b hover:bg-gray-200"
+              className="cursor-pointer p-2 border-b border-b-gray-400 hover:bg-gray-200 transition-all"
             >
               {city.name} ({city.country})
               {selectedCity === city.id && (
               <div className="p-4  bg-gray-50 border cursor-default rounded shadow mb-2">
               {markers[city.id] ? (
                 <button
-                  className="cursor-pointer bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded"
+                  className="btn btn-red"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleRemoveMarker(city.id)
@@ -77,7 +77,7 @@ export function CityList() {
                 </button>
               ) : (
                 <button
-                  className="cursor-pointer bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded"
+                  className="btn btn-blue"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleAddMarker(city.id)
@@ -87,7 +87,7 @@ export function CityList() {
                 </button>
               )}
               <button
-                className="cursor-pointer block bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 mt-2 rounded"
+                className="btn btn-blue btn-block"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleEditCity(city);
@@ -96,7 +96,7 @@ export function CityList() {
                 Edit City
               </button>
               <button
-                className="cursor-pointer block bg-red-500 hover:bg-red-400 text-white px-4 py-2 mt-2 rounded"
+                className="btn btn-red btn-block"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleRemoveMarker(city.id);
@@ -114,7 +114,7 @@ export function CityList() {
 
     {/* Circular Button */}
     <button
-      className="absolute left-62 bottom-4 w-12 h-12 bg-blue-500 text-4xl text-white rounded-full hover:bg-blue-400 cursor-pointer"
+      className="btn-circle btn-blue absolute left-62 bottom-4"
       onClick={() => setIsPopupOpen(true)} // Open the popup
     >
       +

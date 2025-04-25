@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Segoe UI' sans-serif;
 }
 
 #root {
@@ -14,11 +14,22 @@ body {
   height: 100%;
 }
 
-.marker {
-  width: 13px;
-  height: 13px;
-  background-color: blue;
-  border-radius: 50%;
-  border: 2px solid white;
-  cursor: pointer;
+.btn {
+  @apply cursor-pointer text-white px-4 py-2 rounded transition-all;
+}
+
+.btn-blue {
+  @apply bg-blue-500 hover:bg-blue-400;
+}
+
+.btn-red {
+  @apply bg-red-500 hover:bg-red-400;
+}
+
+.btn-block {
+  @apply block mt-2;
+}
+
+.btn-circle {
+  @apply cursor-pointer text-white transition-all w-12 h-12 text-4xl rounded-full font-[sans-serif];
 }

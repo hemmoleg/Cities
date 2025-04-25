@@ -12,8 +12,8 @@ export function MarkerComponent({ color, cityId }: MarkerComponentProps) {
   
   return (
     <div
-      className="marker"
-      style={{ backgroundColor: color }}
+      className="cursor-pointer w-[2rem] h-[2rem] rounded-full border-2 border-red-500"
+      style={{ borderColor: color }}
     />
   );
 }

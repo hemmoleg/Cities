@@ -104,19 +104,19 @@ export function AddCityPopup({ onClose, city }: AddCityPopupProps) {
         </div>
         <div className="flex justify-end">
           <button
-            className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 cursor-pointer hover:bg-gray-200"
+            className="btn bg-gray-500 text-gray-700 hover:bg-gray-400 mr-2"
             onClick={onClose}
           >
             Cancel
           </button>
           <button
-            className={`px-4 py-2 rounded ${
+            className={`btn ${
               isFormValid
-                ? "bg-blue-500 text-white cursor-pointer hover:bg-blue-400"
-                : "bg-blue-100 text-gray-700 cursor-not-allowed"
+                ? "btn-blue"
+                : "bg-blue-200 text-gray-700"
             }`}
             onClick={handleSubmit}
-            disabled={!isFormValid} // Disable button if form is invalid
+            style={{ cursor: isFormValid ? "pointer" : "not-allowed" }}
           >
             {city ? ('Edit') : ('Add')}
           </button>
