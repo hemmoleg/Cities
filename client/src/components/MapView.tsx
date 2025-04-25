@@ -6,13 +6,15 @@ import { City } from "../store/city";
 import ReactDOM from "react-dom/client";
 import { MarkerComponent } from "./Marker";
 import { PopupComponent } from "./MarkerPopup";
+import { useMarkerStore } from "../store/markers";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;;
 
 export function MapView() {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
-  const { cities, cityColors, setCityColor,  markers, addMarker } = useCityStore();
+  const { cities } = useCityStore();
+  const { markers, cityColors, setCityColor, addMarker } = useMarkerStore();
 
   useEffect(() => {
     if (!mapContainer.current || mapRef.current) return;
@@ -28,7 +30,7 @@ export function MapView() {
   
   const addMarkerToCity = (city: City) => {
    
-    const { markers } = useCityStore.getState();
+    const { markers } = useMarkerStore.getState();
 
     if (markers[city.id]) return;
 

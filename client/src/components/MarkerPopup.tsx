@@ -1,4 +1,4 @@
-import { useCityStore } from "../store/cities";
+import { useMarkerStore } from "../store/markers";
 
 interface PopupComponentProps {
   cityId: number;
@@ -10,7 +10,7 @@ interface PopupComponentProps {
 
 export function PopupComponent({ cityId, cityName, countryName, color, onColorChange }: PopupComponentProps) {
   
-  useCityStore((state) => color = state.cityColors[cityId]); 
+  useMarkerStore((state) => color = state.cityColors[cityId]); 
 
   return (
     <div>

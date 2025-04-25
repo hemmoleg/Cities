@@ -3,10 +3,12 @@ import { useCityStore } from "../store/cities";
 import { AddCityPopup } from "./AddCityPopup";
 import { ApiService } from "../services/ApiService";
 import { City } from "../store/city";
+import { useMarkerStore } from "../store/markers";
 
 
 export function CityList() {
-  const { cities, setCities, markers, removeMarker} = useCityStore();
+  const { cities, setCities } = useCityStore();
+  const { markers, removeMarker } = useMarkerStore();
   const [selectedCity, setSelectedCapital] = useState<number | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [cityToEdit, setCityToEdit] = useState<City | null>(null);

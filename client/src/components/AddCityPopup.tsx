@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ApiService } from "../services/ApiService";
 import { useCityStore } from "../store/cities";
 import { City } from "../store/city";
+import { useMarkerStore } from "../store/markers";
 
 interface AddCityPopupProps {
   onClose: () => void; 
@@ -14,7 +15,8 @@ export function AddCityPopup({ onClose, city }: AddCityPopupProps) {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
 
-  const { cities, setCities, markers, addMarker, removeMarker} = useCityStore();
+  const { cities, setCities} = useCityStore();
+  const { markers } = useMarkerStore();
 
   useEffect(() => {
     if (city) {

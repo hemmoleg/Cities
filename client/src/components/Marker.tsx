@@ -1,4 +1,4 @@
-import { useCityStore } from "../store/cities";
+import { useMarkerStore } from "../store/markers";
 
 interface MarkerComponentProps {
   color: string;
@@ -7,8 +7,7 @@ interface MarkerComponentProps {
 
 export function MarkerComponent({ color, cityId }: MarkerComponentProps) {
   
-  const city = useCityStore((state) => state.cities.find((c) => c.id === cityId)); 
-  useCityStore((state) => color = state.cityColors[cityId]); 
+  useMarkerStore((state) => color = state.cityColors[cityId]); 
   
   return (
     <div
