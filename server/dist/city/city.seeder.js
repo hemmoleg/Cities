@@ -9,20 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CapitalSeeder = void 0;
+exports.CitySeeder = void 0;
 const common_1 = require("@nestjs/common");
-const capital_service_1 = require("./capital.service");
+const city_service_1 = require("./city.service");
 const axios_1 = require("axios");
-let CapitalSeeder = class CapitalSeeder {
-    constructor(capitalService) {
-        this.capitalService = capitalService;
+let CitySeeder = class CitySeeder {
+    constructor(citiesService) {
+        this.citiesService = citiesService;
     }
     async onModuleInit() {
-        const existing = await this.capitalService.count();
+        const existing = await this.citiesService.count();
         if (existing > 0)
             return;
         const res = await axios_1.default.get('https://restcountries.com/v3.1/all');
-        const capitals = res.data
+        const cities = res.data
             .filter((c) => { var _a, _b; return ((_a = c.capital) === null || _a === void 0 ? void 0 : _a[0]) && ((_b = c.capitalInfo) === null || _b === void 0 ? void 0 : _b.latlng); })
             .map((c) => ({
             name: c.capital[0],
@@ -30,13 +30,13 @@ let CapitalSeeder = class CapitalSeeder {
             latitude: c.capitalInfo.latlng[0],
             longitude: c.capitalInfo.latlng[1],
         }));
-        await this.capitalService.bulkInsert(capitals);
-        console.log(`Imported ${capitals.length} capitals`);
+        await this.citiesService.bulkInsert(cities);
+        console.log(`Imported ${cities.length} cities`);
     }
 };
-exports.CapitalSeeder = CapitalSeeder;
-exports.CapitalSeeder = CapitalSeeder = __decorate([
+exports.CitySeeder = CitySeeder;
+exports.CitySeeder = CitySeeder = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [capital_service_1.CapitalService])
-], CapitalSeeder);
-//# sourceMappingURL=capital.seeder.js.map
+    __metadata("design:paramtypes", [city_service_1.CityService])
+], CitySeeder);
+//# sourceMappingURL=city.seeder.js.map

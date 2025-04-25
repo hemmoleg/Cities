@@ -12,47 +12,47 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CapitalService = void 0;
+exports.CityService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const capital_entity_1 = require("./capital.entity");
-let CapitalService = class CapitalService {
-    constructor(capitalRepository) {
-        this.capitalRepository = capitalRepository;
+const city_entity_1 = require("./city.entity");
+let CityService = class CityService {
+    constructor(cityRepository) {
+        this.cityRepository = cityRepository;
     }
     async count() {
-        return this.capitalRepository.count();
+        return this.cityRepository.count();
     }
-    async bulkInsert(capitals) {
-        await this.capitalRepository.save(capitals);
+    async bulkInsert(citys) {
+        await this.cityRepository.save(citys);
     }
     findAll() {
-        return this.capitalRepository.find();
+        return this.cityRepository.find();
     }
     findByName(name) {
-        return this.capitalRepository
-            .createQueryBuilder('capital')
-            .where('LOWER(capital.name) = LOWER(:name)', { name })
+        return this.cityRepository
+            .createQueryBuilder('city')
+            .where('LOWER(city.name) = LOWER(:name)', { name })
             .getOne();
     }
-    create(capital) {
-        return this.capitalRepository.save(capital);
+    create(city) {
+        return this.cityRepository.save(city);
     }
-    update(id, capital) {
-        return this.capitalRepository.save(Object.assign({ id }, capital));
+    update(id, city) {
+        return this.cityRepository.save(Object.assign({ id }, city));
     }
     async delete(id) {
-        await this.capitalRepository.delete(id);
+        await this.cityRepository.delete(id);
     }
     async clear() {
-        await this.capitalRepository.clear();
+        await this.cityRepository.clear();
     }
 };
-exports.CapitalService = CapitalService;
-exports.CapitalService = CapitalService = __decorate([
+exports.CityService = CityService;
+exports.CityService = CityService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(capital_entity_1.Capital)),
+    __param(0, (0, typeorm_1.InjectRepository)(city_entity_1.City)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], CapitalService);
-//# sourceMappingURL=capital.service.js.map
+], CityService);
+//# sourceMappingURL=city.service.js.map

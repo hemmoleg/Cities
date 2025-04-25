@@ -9,8 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const capital_module_1 = require("./capital/capital.module");
-const capital_entity_1 = require("./capital/capital.entity");
+const city_module_1 = require("./city/city.module");
+const city_entity_1 = require("./city/city.entity");
 const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
@@ -22,10 +22,10 @@ exports.AppModule = AppModule = __decorate([
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
                 url: process.env.DATABASE_URL,
-                entities: [capital_entity_1.Capital],
-                synchronize: false,
+                entities: [city_entity_1.City],
+                synchronize: true,
             }),
-            capital_module_1.CapitalModule,
+            city_module_1.CityModule,
         ],
     })
 ], AppModule);

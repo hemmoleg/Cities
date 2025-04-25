@@ -6,21 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CapitalModule = void 0;
+exports.CityModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const capital_entity_1 = require("./capital.entity");
-const capital_service_1 = require("./capital.service");
-const capital_controller_1 = require("./capital.controller");
-const capital_seeder_1 = require("./capital.seeder");
-let CapitalModule = class CapitalModule {
+const city_entity_1 = require("./city.entity");
+const city_service_1 = require("./city.service");
+const city_controller_1 = require("./city.controller");
+const city_seeder_1 = require("./city.seeder");
+let CityModule = class CityModule {
 };
-exports.CapitalModule = CapitalModule;
-exports.CapitalModule = CapitalModule = __decorate([
+exports.CityModule = CityModule;
+exports.CityModule = CityModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([capital_entity_1.Capital])],
-        controllers: [capital_controller_1.CapitalController],
-        providers: [capital_service_1.CapitalService, capital_seeder_1.CapitalSeeder],
+        imports: [typeorm_1.TypeOrmModule.forFeature([city_entity_1.City])],
+        controllers: [city_controller_1.CityController],
+        providers: [city_service_1.CityService, city_seeder_1.CitySeeder],
     })
-], CapitalModule);
-//# sourceMappingURL=capital.module.js.map
+], CityModule);
+//# sourceMappingURL=city.module.js.map

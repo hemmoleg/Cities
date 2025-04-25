@@ -9,33 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Capital = void 0;
+exports.City = void 0;
 const typeorm_1 = require("typeorm");
-let Capital = class Capital {
+let City = class City {
 };
-exports.Capital = Capital;
+exports.City = City;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Capital.prototype, "id", void 0);
+], City.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Capital.prototype, "name", void 0);
+], City.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Capital.prototype, "country", void 0);
+], City.prototype, "country", void 0);
 __decorate([
     (0, typeorm_1.Column)('float'),
     __metadata("design:type", Number)
-], Capital.prototype, "latitude", void 0);
+], City.prototype, "latitude", void 0);
 __decorate([
     (0, typeorm_1.Column)('float'),
     __metadata("design:type", Number)
-], Capital.prototype, "longitude", void 0);
-exports.Capital = Capital = __decorate([
+], City.prototype, "longitude", void 0);
+exports.City = City = __decorate([
     (0, typeorm_1.Entity)(),
     (0, typeorm_1.Unique)(['name', 'country'])
-], Capital);
-//# sourceMappingURL=capital.entity.js.map
+], City);
+//# sourceMappingURL=city.entity.js.map

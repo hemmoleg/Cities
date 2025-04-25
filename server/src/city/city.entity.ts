@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
 
 @Entity()
 @Unique(['name', 'country'])
-export class Capital {
+export class City {
   @PrimaryGeneratedColumn()
   id!: number;
 

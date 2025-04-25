@@ -12,52 +12,52 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CapitalController = void 0;
+exports.CityController = void 0;
 const common_1 = require("@nestjs/common");
-const capital_service_1 = require("./capital.service");
-let CapitalController = class CapitalController {
-    constructor(capitalService) {
-        this.capitalService = capitalService;
+const city_service_1 = require("./city.service");
+let CityController = class CityController {
+    constructor(cityService) {
+        this.cityService = cityService;
     }
     findAll() {
-        return this.capitalService.findAll();
+        return this.cityService.findAll();
     }
     findOne(name) {
-        return this.capitalService.findByName(name);
+        return this.cityService.findByName(name);
     }
-    create(capital) {
+    create(city) {
         console.log("received create call");
-        console.log(capital);
-        return this.capitalService.create(capital);
+        console.log(city);
+        return this.cityService.create(city);
     }
-    update(id, capital) {
-        return this.capitalService.update(+id, capital);
+    update(id, city) {
+        return this.cityService.update(+id, city);
     }
     remove(id) {
-        return this.capitalService.delete(+id);
+        return this.cityService.delete(+id);
     }
 };
-exports.CapitalController = CapitalController;
+exports.CityController = CityController;
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], CapitalController.prototype, "findAll", null);
+], CityController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':name'),
     __param(0, (0, common_1.Param)('name')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], CapitalController.prototype, "findOne", null);
+], CityController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], CapitalController.prototype, "create", null);
+], CityController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -65,16 +65,16 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
-], CapitalController.prototype, "update", null);
+], CityController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], CapitalController.prototype, "remove", null);
-exports.CapitalController = CapitalController = __decorate([
-    (0, common_1.Controller)('capital'),
-    __metadata("design:paramtypes", [capital_service_1.CapitalService])
-], CapitalController);
-//# sourceMappingURL=capital.controller.js.map
+], CityController.prototype, "remove", null);
+exports.CityController = CityController = __decorate([
+    (0, common_1.Controller)('city'),
+    __metadata("design:paramtypes", [city_service_1.CityService])
+], CityController);
+//# sourceMappingURL=city.controller.js.map

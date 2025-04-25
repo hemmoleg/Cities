@@ -1,7 +1,7 @@
 {
-  "name": "capitals-backend",
+  "name": "cities-backend",
   "version": "1.0.0",
-  "description": "NestJS API for managing capitals",
+  "description": "NestJS API for managing cities",
   "main": "dist/main.js",
   "scripts": {
     "start": "nest start",

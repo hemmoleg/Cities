@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CapitalModule } from './capital/capital.module';
-import { Capital } from './capital/capital.entity';
+import { CityModule } from './city/city.module';
+import { City } from './city/city.entity';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -10,10 +10,10 @@ import { ConfigModule } from '@nestjs/config';
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL,
-      entities: [Capital],
-      synchronize: false,
+      entities: [City],
+      synchronize: true,
     }),
-    CapitalModule,
+    CityModule,
   ],
 })
 export class AppModule {}
