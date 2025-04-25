@@ -25,12 +25,6 @@ export function AddCityPopup({ onClose, city }: AddCityPopupProps) {
     }
   }, [city]);
 
-
-  useEffect(() => {
-    if(city)
-      console.log("loglog:", cities.find(c => c.id === city.id));
-  }, [cities]);
-
   const isFormValid =
     name.trim() !== "" &&
     country.trim() !== "" &&
@@ -44,8 +38,6 @@ export function AddCityPopup({ onClose, city }: AddCityPopupProps) {
       longitude: parseFloat(longitude),
       latitude: parseFloat(latitude),
     };
-
-    console.log("New City:", updatedCity); 
   
     try {
       if (city) {

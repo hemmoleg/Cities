@@ -15,6 +15,7 @@ export function CityList() {
     (async () => {
       try {
         const fetchedCities = await ApiService.fetchCities();
+        fetchedCities.sort((a, b) => a.name.localeCompare(b.name));
         setCities(fetchedCities);
       } catch (error) {
         console.error("Error loading cities:", error);
