@@ -4,7 +4,7 @@ export class ApiService {
   private static BASE_URL = "http://localhost:3000"; // Base URL for the backend
 
   static async fetchCities(): Promise<any[]> {
-    const response = await fetch(`${this.BASE_URL}/capital`, {
+    const response = await fetch(`${this.BASE_URL}/city`, {
       method: "GET",
     });
 
