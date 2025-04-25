@@ -36,10 +36,6 @@ Cities is a full-stack web application that allows users to manage and visualize
   ```
   VITE_MAPBOX_TOKEN=<your_mapbox_token>
   ```
-- **Backend**: Configure the database connection in the .env file in the server folder:
-  ```
-  DATABASE_URL=postgres://<username>:<password>@localhost:5432/cities
-  ```
 
 ### License
 This project is licensed under the MIT License.
