@@ -114,7 +114,7 @@ export function CityList() {
 
     {/* Circular Button */}
     <button
-      className="absolute bottom-4 w-12 h-12 bg-blue-500 text-4xl text-white rounded-full hover:bg-blue-400 cursor-pointer"
+      className="absolute left-62 bottom-4 w-12 h-12 bg-blue-500 text-4xl text-white rounded-full hover:bg-blue-400 cursor-pointer"
       onClick={() => setIsPopupOpen(true)} // Open the popup
     >
       +

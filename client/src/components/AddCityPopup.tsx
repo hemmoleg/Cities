@@ -113,7 +113,7 @@ export function AddCityPopup({ onClose, city }: AddCityPopupProps) {
             className={`px-4 py-2 rounded ${
               isFormValid
                 ? "bg-blue-500 text-white cursor-pointer hover:bg-blue-400"
-                : "bg-gray-300 text-gray-700 cursor-not-allowed"
+                : "bg-blue-100 text-gray-700 cursor-not-allowed"
             }`}
             onClick={handleSubmit}
             disabled={!isFormValid} // Disable button if form is invalid
